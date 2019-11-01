@@ -28,8 +28,6 @@ COPY ./validationKeystore.jks /config/resources/security/validationKeystore.jks
 COPY ./keystore.xml /config/configDropins/defaults/keystore.xml
 COPY ./client/loopctl.sh /loopctl.sh
 
-COPY ./src/main/liberty/config /config/
-COPY ./target/portfolio-1.0-SNAPSHOT.war /config/apps/Portfolio.war
 RUN chown -R 1001.0 /loopctl.jar /loopctl.sh /config /opt/ibm/wlp/usr/servers/defaultServer /opt/ibm/wlp/usr/shared/resources && chmod -R g+rw /config /opt/ibm/wlp/usr/servers/defaultServer  /opt/ibm/wlp/usr/shared/resources
 
 EXPOSE 9080
