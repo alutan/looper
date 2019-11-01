@@ -35,4 +35,5 @@ RUN chown -R 1001.0 /loopctl.jar /loopctl.sh /config /opt/ibm/wlp/usr/servers/de
 EXPOSE 9080
 
 USER 1001
-RUN configure.sh
+
+RUN installUtility install --acceptLicense microprofile-3.0 monitor-1.0 appsecurity-2.0 jwtsso-1.0
