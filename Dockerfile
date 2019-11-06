@@ -35,4 +35,3 @@ EXPOSE 9080
 USER 1001
 
 RUN installUtility install --acceptLicense microprofile-3.0 monitor-1.0 appsecurity-2.0 jwtsso-1.0
-RUN configure.sh
