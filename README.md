@@ -25,7 +25,7 @@ get 2500 free calls per month before it starts charging you per call.
 It responds to a `GET ?count={count}` REST request, where you pass in the count of how many iterations
 to run.  If you omit the **count** query param, it assumes 1 iteration.
 
-For example, if you hit the `http://localhost:9080/looper?count=5` URL, it would run 5 iterations.  It
+For example, if you hit the `http://<hostname>:9080/looper?count=5` URL, it would run 5 iterations.  It
 returns the output from the various calls (various collections of JSON) as `text/plain`.
 
 Note that the call doesn't return until all the iterations are complete.  So you might be waiting a
@@ -37,16 +37,26 @@ parallel threads.  You will see output from every iteration, with timings.  Or y
 CLI client locally and run it from your laptop, passing the *node port* or *ingress* URL of where
 the *looper* servlet is running.
 
-### Deploy
-
-Use WebSphere Liberty helm chart to deploy Looper microservice:
-```bash
-helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable/
-helm install ibm-charts/ibm-websphere-liberty -f <VALUES_YAML> -n <RELEASE_NAME> --tls
+ ### Prerequisites for OCP Deployment
+ This project requires three secrets: `jwt`, and `urls`.
+ 
+ ### Build and Deploy to OCP
+To build `looper` clone this repo and run:
 ```
+cd templates
 
-In practice this means you'll run something like:
-```bash
-helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable/
-helm install ibm-charts/ibm-websphere-liberty -f manifests/looper-values.yaml -n looper --namespace stock-trader --tls
+oc create -f looper-liberty-projects.yaml
+
+oc create -f looper-liberty-deploy.yaml -n looper-liberty-dev
+oc create -f looper-liberty-deploy.yaml -n looper-liberty-stage
+oc create -f looper-liberty-deploy.yaml -n looper-liberty-prod
+
+oc new-app looper-liberty-deploy -n looper-liberty-dev
+oc new-app looper-liberty-deploy -n looper-liberty-stage
+oc new-app looper-liberty-deploy -n looper-liberty-prod
+
+oc create -f looper-liberty-build.yaml -n looper-liberty-build
+
+oc new-app looper-liberty-build -n looper-liberty-build
+
 ```
