@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: List
+items:
+- kind: ProjectRequest
+  apiVersion: v1
+  metadata:
+    name: looper-liberty-build
+    creationTimestam: null
+  displayName: Looper on Liberty - Build
+- kind: ProjectRequest
+  apiVersion: v1
+  metadata:
+    name: looper-liberty-dev
+    creationTimestam: null
+  displayName: Looper on Liberty - Dev
+- kind: ProjectRequest
+  apiVersion: v1
+  metadata:
+    name: looper-liberty-stage
+    creationTimestam: null
+  displayName: Looper on Liberty - Stage
+- kind: ProjectRequest
+  apiVersion: v1
+  metadata:
+    name: looper-liberty-prod
+    creationTimestam: null
+  displayName: Looper on Liberty - Prod
